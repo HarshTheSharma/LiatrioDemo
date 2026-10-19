@@ -1,0 +1,7 @@
+name: Quotes
+description: Checks that the API returns a quote
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: curl --fail --silent http://localhost/ | grep '"quote"'

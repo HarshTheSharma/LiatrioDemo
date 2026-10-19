@@ -1,0 +1,18 @@
+name: Pipeline
+
+on: push
+
+jobs:
+  pipeline:
+    uses: HarshTheSharma/LiatrioInterview/.github/workflows/pipeline.yml@main
+    secrets:
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  deploy:
+    needs: pipeline
+    if: github.ref == 'refs/heads/main'
+    uses: HarshTheSharma/LiatrioInterview/.github/workflows/deploy.yml@main
+    permissions:
+      id-token: write
+    secrets:
+      GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
